@@ -15,6 +15,17 @@ VOLUME_INDEX = 5
 
 STOCK_INFO_DICT = load_yaml("docs/stock_info.yaml")
 
+def list_files(directory):
+    '''Return all files in the directory
+    
+    Arguments:
+        directory {str} -- Location of directory
+    '''
+
+    from os import listdir
+    from os.path import isfile, join
+    return [f for f in listdir(directory) if isfile(join(directory, f))]
+
 def print_stock_data(stock_name, o, h, l, c):
     print ("stock_name: {}".format(stock_name))
     print ("open: {}".format(o))
