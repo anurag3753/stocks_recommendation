@@ -1,0 +1,9 @@
+pyyaml
+pandas
+selenium
+pytest
+pymysql
+sqlalchemy
+mysqlclient
+google-api-python-client
+google-auth-oauthlib

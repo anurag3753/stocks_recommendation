@@ -1,0 +1,8 @@
+"bullish_marubozu": "On a bullish marubozu, the day's low price defines the stoploss.
+                    There is no direct target defined on a marubozu"
+"bearish_marubozu": "On a bearish marubozu, the day's open/high defines stoploss in case of intraday, high in case of F&O"
+"spinning_top_in_uptrend": "Spinning Top in Uptrend, Buy Half the Stocks"
+"spinning_top_in_downtrend": "Spinning Top in Downtrend, Sell Half the Stocks"
+"hangingman": "Paper Umbrella at the top of Uptrend is called HangingMan, Sell Stocks"
+"hammer": "Paper Umbrella at the bottom of Downtrend is called Hammer, Buy Stocks"
+"shooting_star": "Shooting star at the top of an uptrend indicates a possible reversal of trend, Sell Stocks"
