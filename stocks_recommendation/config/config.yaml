@@ -3,4 +3,4 @@
 "browser"            :    'chrome'
 "database"           :    'nifty50'
 "driver_location"    :    'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
-"webdriver_location" :    'C:\Users\anirudhs\Desktop\stock\chromedriver.exe'
+"webdriver_location" :    'C:\Users\anuragm\Downloads\chromedriver_win32\chromedriver.exe'
