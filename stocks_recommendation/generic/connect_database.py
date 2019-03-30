@@ -41,7 +41,7 @@ class ConnectDatabase:
         return engine
 
     # Run query
-    def run(self, query):
+    def run(self, query, result_needed = True):
         engine = self.create_db_engine()
         try:
             engine.connect()
@@ -51,8 +51,11 @@ class ConnectDatabase:
             print_err_exit(msg)
 
         try:
-            result = engine.execute(query).fetchall()
-            return result
+            if (result_needed):
+                result = engine.execute(query).fetchall()
+                return result
+            else:
+                engine.execute(query)
         except Exception as e:
             print ("Query:")
             print (query)
