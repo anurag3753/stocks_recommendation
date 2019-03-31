@@ -15,7 +15,6 @@ class PaperUmbrella( Candle ):
         real_body = self.true_body()
         upper_shadow, lower_shadow = self.get_shadow_length()
         flag = False
-        print(((float(upper_shadow) / self.h) * 100))
         if (float(lower_shadow)/real_body >= 2) and ((float(upper_shadow) / self.h) * 100) <= self.threshold:
             flag = True
         
@@ -24,9 +23,7 @@ class PaperUmbrella( Candle ):
             self.downtrend = is_downtrend(self.stock_name)
         
         if flag:
-            print("flag")
             if self.uptrend:
-                print("uptrend")
                 self.candle = True
                 self.trade_setting["action"] = "sell"
                 self.trade_setting["buy"] = self.c
@@ -36,7 +33,6 @@ class PaperUmbrella( Candle ):
                 self.trade_setting["info"] = general_info("hangingman")
 
             elif self.downtrend:
-                print("downtrend")
                 self.candle = True
                 self.trade_setting["action"] = "buy"
                 self.trade_setting["buy"] = self.c
