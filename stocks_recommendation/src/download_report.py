@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from generic.utils import print_err_exit,print_warn,remove
+from generic.utils import print_err_exit,print_warn,remove,mkdir
 
 def download_daily_report(filepath, download_location, browser, driver_location, webdriver_location):
     remove(filepath)
@@ -26,6 +26,8 @@ def download_daily_report(filepath, download_location, browser, driver_location,
         driver.quit()
 
 def download_historical_report(filepath, download_location, browser, driver_location, webdriver_location, stock_symbol, period):
+    remove(download_location)
+    mkdir(download_location)
     try :
         if (browser == "chrome"):
             chromeOptions = webdriver.ChromeOptions()
