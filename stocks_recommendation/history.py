@@ -4,7 +4,7 @@ from setup import *
 from generic.utils import *
 from generic.stock_utils import get_db_connection, stocks_underwatch, list_files
 from generic.connect_database import ConnectDatabase
-from src.download_report import download_historical_report, update_historical_prices
+from src.download_report import download_historical_report
 from src.download_report import *
 
 # CONSTANTS
@@ -74,6 +74,10 @@ if __name__ == "__main__":
     data = load_yaml("config/config.yaml")
     env =  get_env(["pwd", "download_location", "data_csv_path"])
     download_location = env['download_location'] + "/" + "historical"
+
+    # Empty the location where data needs to be downloaded
+    remove(download_location)
+    mkdir(download_location)
 
     # Download Historical Reports
     stocks = list(stocks_underwatch())
