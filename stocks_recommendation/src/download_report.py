@@ -26,8 +26,6 @@ def download_daily_report(filepath, download_location, browser, driver_location,
         driver.quit()
 
 def download_historical_report(filepath, download_location, browser, driver_location, webdriver_location, stock_symbol, period):
-    remove(download_location)
-    mkdir(download_location)
     try :
         if (browser == "chrome"):
             chromeOptions = webdriver.ChromeOptions()
