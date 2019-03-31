@@ -62,7 +62,7 @@ def process_file_names(folder_path, files_list):
         for _file in files_list:
             # new file name
             new_file_name = _file.lower()
-            new_file_name = new_file_name[24:-8]
+            new_file_name = new_file_name[24:-7]
             src  = folder_path + "/" + _file
             dest = folder_path + "/" + new_file_name
             rename(src, dest)
