@@ -37,7 +37,6 @@ def update_historical_prices(folder_path, stock_list, truncate = True):
     # Connect to DB
     db_conn = get_db_connection()
     engine  = db_conn.create_db_engine()
-    stock_list = ["adaniports"]
     for stock in stock_list:
         # Truncate Stock
         if truncate:
@@ -92,5 +91,8 @@ if __name__ == "__main__":
     file_list = list_files(download_location)
     process_file_names(download_location, file_list)
 
+    # Updated files list
+    updated_file_list = list_files(download_location)
+
     # Update the Prices in Database
-    update_historical_prices(download_location, file_list, truncate=True)
+    update_historical_prices(download_location, updated_file_list, truncate=True)
