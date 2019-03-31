@@ -76,17 +76,17 @@ if __name__ == "__main__":
     download_location = env['download_location'] + "/" + "historical"
 
     # Download Historical Reports
-    # stocks = list(stocks_underwatch())
-    # for stock in stocks:
-    #     download_historical_report(env['data_csv_path'], download_location, data['browser'], \
-    #         data['driver_location'], data['webdriver_location'], stock, PERIOD)
+    stocks = list(stocks_underwatch())
+    for stock in stocks:
+        download_historical_report(env['data_csv_path'], download_location, data['browser'], \
+            data['driver_location'], data['webdriver_location'], stock, PERIOD)
 
     # Wait for some time to finish complete downloading
-    # time.sleep(20) # Sleep for 20 sec
+    time.sleep(20) # Sleep for 20 sec
 
     # Process the downloaded data
     file_list = list_files(download_location)
-    # process_file_names(download_location, file_list)
+    process_file_names(download_location, file_list)
 
     # Update the Prices in Database
     update_historical_prices(download_location, file_list, truncate=True)
