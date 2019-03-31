@@ -25,7 +25,7 @@ def download_daily_report(filepath, download_location, browser, driver_location,
         print_err_exit(msg)
         driver.quit()
 
-def download_historical_report(filepath, download_location, browser, driver_location, webdriver_location, stock_symbol):
+def download_historical_report(filepath, download_location, browser, driver_location, webdriver_location, stock_symbol, period):
     try :
         if (browser == "chrome"):
             chromeOptions = webdriver.ChromeOptions()
@@ -34,8 +34,9 @@ def download_historical_report(filepath, download_location, browser, driver_loca
             driver = webdriver.Chrome(executable_path=webdriver_location, chrome_options=chromeOptions)
             driver.get('https://www.nseindia.com/products/content/equities/equities/eq_security.htm')
             driver.find_element_by_id('rdPeriod').click()
-            Select(driver.find_element_by_id('dateRange')).select_by_value('24month')
+            Select(driver.find_element_by_id('dateRange')).select_by_value(period)
             driver.find_element_by_id('symbol').send_keys(stock_symbol)
+            driver.find_element_by_id('series').send_keys('EQ')
             get_data = driver.find_element_by_id('get')
             get_data.click()
             download_link = WebDriverWait(driver, 10).until(
