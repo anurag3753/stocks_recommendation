@@ -428,8 +428,7 @@ def last_n_days_volume(stock_name, days=10, date = get_nth_date()):
         print_warn("last_n_days_volume() failed")
         return None
 
-def last_n_days_avg(stock_name, days=10):
-    date = get_latest_date_for_stock(stock_name)
+def last_n_days_avg(stock_name, days=10, date = get_nth_date()):
     volume = last_n_days_volume(stock_name=stock_name, days=days, date=date)
     if volume:
         return float(sum(volume))/len(volume)
