@@ -200,6 +200,24 @@ def get_stock_stats(stock_name, date):
 
     return get_values(sql_result) 
 
+def get_latest_date_for_stock(stock_name):
+    """Return latest date present for stock
+
+    Arguments:
+        stock_name {str} -- Stock Name
+    """
+
+    engine = get_db_connection()
+    query = ("SELECT max(date) FROM" + " " + surround_mysql_quotes(stock_name))
+    result = engine.run(query)
+    # Get latest date for stock in database
+    try:
+        latest_date = (result[0][0].strftime("%Y-%m-%d"))
+        return latest_date
+    except Exception as e:
+        print(e)
+        return None
+
 def get_todays_stats(stock_name):
     """Return today's stock stats
     
@@ -210,8 +228,9 @@ def get_todays_stats(stock_name):
         MutipleValues -- OHLCV
     """
 
-    now = get_nth_date()
-    return get_stock_stats(stock_name, now)
+    latest_date = get_latest_date_for_stock(stock_name)
+    if latest_date:
+        return get_stock_stats(stock_name, latest_date)
 
 def is_small_body(o, c, threshold):
     """Check if it has small candle body
@@ -381,7 +400,7 @@ def general_info(pattern):
 
     return STOCK_INFO_DICT[pattern]
 
-def last_n_days_volume(stock_name, days=10):
+def last_n_days_volume(stock_name, days=10, date = get_nth_date()):
     '''Get last n days volume information
 
     Arguments:
@@ -394,7 +413,7 @@ def last_n_days_volume(stock_name, days=10):
         list -- List of last n days volume information
     '''
 
-    sql_result = get_historical_data(stock_name=stock_name, days=days)
+    sql_result = get_historical_data(stock_name=stock_name, days=days, date=date)
     volume = []
     try:
         if sql_result:
@@ -410,22 +429,12 @@ def last_n_days_volume(stock_name, days=10):
         return None
 
 def last_n_days_avg(stock_name, days=10):
-    volume = last_n_days_volume(stock_name=stock_name, days=days)
+    date = get_latest_date_for_stock(stock_name)
+    volume = last_n_days_volume(stock_name=stock_name, days=days, date=date)
     if volume:
         return float(sum(volume))/len(volume)
     else:
         return None
-
-def volume_trend_analysis(stock_name, days=10):
-    avg_volume = last_n_days_avg(stock_name, days=10)
-    o, h, l, c, v = get_todays_stats(stock_name)
-    po, ph, pl, pc, pv = get_previous_day_stats(stock_name)
-    if v > avg_volume:
-        if c > pc:
-            return "bullish"
-        elif c < pc:
-            return "bearish"
-    return "trap"
 
 if __name__ == "__main__":
     pass
