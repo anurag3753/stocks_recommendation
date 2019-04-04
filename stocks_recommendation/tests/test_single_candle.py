@@ -63,3 +63,22 @@ def test_shooting_star(run_before_all_tests):
     trend = ShootingStar(1426, 1453, 1410, 1417, "x", uptrend=True)
     candle, tr_st = trend.run()
     assert tr_st['candle'] == "shooting_star"
+
+def test_bullish_harami(run_before_all_tests):
+    from indicators.candles.Harami import Harami
+    trend = Harami(824,847,818,835,"x", days=5, downtrend=True, previous_day=[868,874,810,815])
+    candle, tr_st = trend.run()
+    assert tr_st['candle'] == "bullish_harami"
+
+def test_bearish_harami(run_before_all_tests):
+    from indicators.candles.Harami import Harami
+    trend = Harami(126.9,129.70,125,124.80,"x",days=5,uptrend=True,previous_day=[124,129,122,127])
+    candle, tr_st = trend.run()
+    assert tr_st['candle'] == "bearish_harami"
+
+
+
+
+
+
+

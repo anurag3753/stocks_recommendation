@@ -5,16 +5,27 @@ from generic.stock_utils import is_uptrend, is_downtrend
 from generic.stock_utils import is_bearish, is_bullish
 
 class Harami( Candle ):
-    def __init__(self, o, h, l, c, stock_name, days = 5):
+    def __init__(self, o, h, l, c, stock_name, days = 5, uptrend = False, downtrend = False, previous_day = []):
         # invoking the __init__ of the parent class
         Candle.__init__(self, o, h, l, c, stock_name)
         self.days = days
+        self.uptrend = uptrend
+        self.downtrend = downtrend
+        self.previous_day = previous_day
 
     def run(self):
-        date = get_latest_date_for_stock(self.stock_name)
-        po, ph, pl, pc, pv = get_previous_day_stats(self.stock_name, date=date)
+        if self.previous_day:
+            po, ph, pl, pc = self.previous_day
 
-        if is_downtrend(stock_name = self.stock_name, days=self.days) and (is_bearish(po, pc)) and (self.o > pc) and is_bullish(self.o, self.c) and (self.c < po):
+        else:
+            date = get_latest_date_for_stock(self.stock_name)
+            po, ph, pl, pc, pv = get_previous_day_stats(self.stock_name, date=date)
+
+        if not self.uptrend and not self.downtrend:
+            self.uptrend = is_uptrend(self.stock_name)
+            self.downtrend = is_downtrend(self.stock_name)
+
+        if self.downtrend and (is_bearish(po, pc)) and (self.o > pc) and is_bullish(self.o, self.c) and (self.c < po):
             self.candle = True
             self.trade_setting["action"] = "buy"
             self.trade_setting["buy"] = self.c
@@ -23,7 +34,8 @@ class Harami( Candle ):
             self.trade_setting["target"] = ""
             self.trade_setting["info"]   = general_info("bullish_harami")
             return self.candle, self.trade_setting
-        elif is_uptrend(stock_name = self.stock_name, days=self.days) and (is_bullish(po, pc)) and (self.o < pc) and is_bearish(self.o, self.c) and (self.c > po):
+
+        elif self.uptrend and (is_bullish(po, pc)) and (self.o < pc) and is_bearish(self.o, self.c) and (self.c > po):
             self.candle = True
             self.trade_setting["action"] = "short"
             self.trade_setting["buy"] = self.c
