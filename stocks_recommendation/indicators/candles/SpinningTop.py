@@ -5,13 +5,14 @@ from generic.stock_utils import is_downtrend
 from generic.stock_utils import is_small_body
 
 class SpinningTop( Candle ):
-    def __init__(self, o, h, l, c, stock_name, body_threshold = 4, shadow_threshold = 5, uptrend = False, downtrend = False):
+    def __init__(self, o, h, l, c, stock_name, body_threshold = 4, shadow_threshold = 5, uptrend = False, downtrend = False, find_trend = True):
         # invoking the __init__ of the parent class
         Candle.__init__(self, o, h, l, c, stock_name)
         self.body_threshold = body_threshold
         self.shadow_threshold = shadow_threshold
         self.uptrend = uptrend
         self.downtrend = downtrend
+        self.find_trend = find_trend
 
     def run(self):
         flag = False
@@ -20,9 +21,10 @@ class SpinningTop( Candle ):
             if float(abs(upper_shadow - lower_shadow)) / max(upper_shadow, lower_shadow) * 100 <= self.shadow_threshold:
                 flag = True
     
-        if not self.uptrend and not self.downtrend:
-            self.uptrend = is_uptrend(self.stock_name)
-            self.downtrend = is_downtrend(self.stock_name)
+        if self.find_trend:
+            if not self.uptrend and not self.downtrend:
+                self.uptrend = is_uptrend(self.stock_name)
+                self.downtrend = is_downtrend(self.stock_name)
 
         if flag:
             if self.uptrend:

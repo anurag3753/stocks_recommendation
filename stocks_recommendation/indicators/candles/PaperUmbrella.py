@@ -4,12 +4,13 @@ from generic.stock_utils import is_uptrend
 from generic.stock_utils import is_downtrend
 
 class PaperUmbrella( Candle ):
-    def __init__(self, o, h, l, c, stock_name, threshold = 1.5, uptrend = False, downtrend = False):
+    def __init__(self, o, h, l, c, stock_name, threshold = 1.5, uptrend = False, downtrend = False, find_trend = True):
         # invoking the __init__ of the parent class
         Candle.__init__(self, o, h, l, c, stock_name)
         self.threshold = threshold
         self.uptrend = uptrend
         self.downtrend = downtrend
+        self.find_trend = find_trend
 
     def run(self):
         real_body = self.true_body()
@@ -18,9 +19,10 @@ class PaperUmbrella( Candle ):
         if (float(lower_shadow)/real_body >= 2) and ((float(upper_shadow) / self.h) * 100) <= self.threshold:
             flag = True
         
-        if not self.uptrend and not self.downtrend:
-            self.uptrend = is_uptrend(self.stock_name)
-            self.downtrend = is_downtrend(self.stock_name)
+        if self.find_trend:
+            if not self.uptrend and not self.downtrend:
+                self.uptrend = is_uptrend(self.stock_name)
+                self.downtrend = is_downtrend(self.stock_name)
         
         if flag:
             if self.uptrend:
