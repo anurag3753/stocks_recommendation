@@ -6,11 +6,12 @@ from generic.stock_utils import is_downtrend
 from generic.stock_utils import print_stock_data
 
 class ShootingStar( Candle ):
-    def __init__(self, o, h, l, c, stock_name, threshold = 1.5, uptrend = False):
+    def __init__(self, o, h, l, c, stock_name, threshold = 1.5, uptrend = False, find_trend = True):
         # invoking the __init__ of the parent class
         Candle.__init__(self, o, h, l, c, stock_name)
         self.threshold = threshold
         self.uptrend = uptrend
+        self.find_trend = find_trend
 
     def run(self):
         flag = False
@@ -24,8 +25,9 @@ class ShootingStar( Candle ):
             print_stock_data(self.stock_name, self.o, self.h, self.l, self.c)
             print (e)
 
-        if not self.uptrend:
-            self.uptrend = is_uptrend(self.stock_name)
+        if self.find_trend:
+            if not self.uptrend:
+                self.uptrend = is_uptrend(self.stock_name)
 
         if flag:
             if self.uptrend:
