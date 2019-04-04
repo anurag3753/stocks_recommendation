@@ -6,6 +6,7 @@ import pickle
 import inspect
 import argparse
 import datetime
+from pathlib import Path
 
 def load_pickle(filepath):
     '''load data from pickle
@@ -21,6 +22,18 @@ def load_pickle(filepath):
         with open(filepath, 'rb') as f:
             data = pickle.load(f)
     return data
+
+def save_to_pickle(data, abs_file_path):
+    '''Save the data to pickle in the desired path
+    
+    Arguments:
+        data {python_object} -- Data could be any valid python object
+        abs_file_path {str} -- Absolute path of the file
+    '''
+
+    if os.path.exists(abs_file_path) and data:
+        with open(abs_file_path, 'wb') as handle:
+            pickle.dump(data, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 def age(filepath, days=30):
     '''This function checks if the file is older than N days.
