@@ -7,7 +7,7 @@ from generic.utils import *
 
 '''Dictionary of Stocks list such that
 
-    stock[name]= {volume:[last_10_days], prev:[ohlc]}
+    stock[name]= {volume:[last_10_days], prev:[ohlcv]}
 
 '''
 
@@ -20,7 +20,7 @@ def generate_preprocessed_data():
         prev_stats[stock] = dict()
 
         # Collect last 10 days volume average
-        prev_stats[stock]['vol'] = last_n_days_avg(stock, days=10, date = get_nth_date())
+        prev_stats[stock]['avg_vol'] = last_n_days_avg(stock, days=10, date = get_nth_date())
 
         # Collect previous trend data
         prev_stats[stock]['uptrend']   = is_uptrend(stock, date=get_nth_date(), days=5)
