@@ -76,11 +76,14 @@ def test_bearish_harami(run_before_all_tests):
     candle, tr_st = trend.run()
     assert tr_st['candle'] == "bearish_harami"
 
-# def test_volume(run_before_all_tests):
-#     from indicators.Volume import Volume
-#     Volume()
+def test_bullish_volume(run_before_all_tests):
+    from indicators.Volume import Volume
+    trend = Volume(126.9,129.70,125,129.80,401,"x",avg=400,previous_day=[124,129,122,127,"anyvolume"])
+    signal = trend.run()
+    assert signal=="bullish"
 
-
-
-
-
+def test_bearish_volume(run_before_all_tests):
+    from indicators.Volume import Volume
+    trend = Volume(126.9,129.70,125,126.80,401,"x",avg=400,previous_day=[124,129,122,127,"anyvolume"])
+    signal = trend.run()
+    assert signal=="bearish"
