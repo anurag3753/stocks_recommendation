@@ -28,7 +28,7 @@ def generate_preprocessed_data():
 
         # Since we are running it, before updating the today's data in db
         # So, techically previous day data, will be today's stats
-        prev_stats[stock]['p_ohlc'] = get_todays_stats(stock)
+        prev_stats[stock]['p_ohlcv'] = get_todays_stats(stock)
 
         # Save the pre-processed data inside pickle
         env = get_env(['pwd'])
