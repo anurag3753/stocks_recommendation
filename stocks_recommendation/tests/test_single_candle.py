@@ -78,12 +78,36 @@ def test_bearish_harami(run_before_all_tests):
 
 def test_bullish_volume(run_before_all_tests):
     from indicators.Volume import Volume
-    trend = Volume(126.9,129.70,125,129.80,401,"x",avg=400,previous_day=[124,129,122,127,"anyvolume"])
+    trend = Volume(126.9,129.70,125,129.80,4003,"x",avg=400,previous_day=[124,129,122,127,"anyvolume"])
     signal = trend.run()
     assert signal=="bullish"
 
 def test_bearish_volume(run_before_all_tests):
     from indicators.Volume import Volume
-    trend = Volume(126.9,129.70,125,126.80,401,"x",avg=400,previous_day=[124,129,122,127,"anyvolume"])
+    trend = Volume(126.9,129.70,125,126.80,4003,"x",avg=400,previous_day=[124,129,122,127,"anyvolume"])
     signal = trend.run()
     assert signal=="bearish"
+
+def test_bullish_engulfing(run_before_all_tests):
+    from indicators.candles.Engulfing import Engulfing
+    trend = Engulfing(122,129.70,125,135,"x",downtrend=True,previous_day=[129,129,122,125,"anyvolume"])
+    candle, tr_st = trend.run()
+    assert tr_st['candle'] =="bullish_engulfing"
+
+def test_bearish_enulfing(run_before_all_tests):
+    from indicators.candles.Engulfing import Engulfing
+    trend = Engulfing(132,129.70,125,123,"x",uptrend=True,previous_day=[125,133,122,129,"anyvolume"])
+    candle, tr_st = trend.run()
+    assert tr_st['candle']=="bearish_engulfing"
+
+def test_piercing_pattern(run_before_all_tests):
+    from indicators.candles.Engulfing import Engulfing
+    trend = Engulfing(122,129.70,125,130,"x",downtrend=True,previous_day=[135,129,122,125,"anyvolume"])
+    candle, tr_st = trend.run()
+    assert tr_st['candle']=="piercing_pattern"
+
+def test_dark_cloud(run_before_all_tests):
+    from indicators.candles.Engulfing import Engulfing
+    trend = Engulfing(130,129.70,125,125,"x",uptrend=True,previous_day=[125,133,122,135,"anyvolume"])
+    candle, tr_st = trend.run()
+    assert tr_st['candle']=="dark_cloud_cover"
