@@ -46,6 +46,18 @@ def test_downtrend_spinning_top(run_before_all_tests):
     candle, tr_st = trend.run()
     assert tr_st['candle'] == "spinning_top_in_downtrend"
 
+def test_uptrend_doji(run_before_all_tests):
+    from indicators.candles.Doji import Doji
+    trend = Doji(210, 230, 188, 207, "x", uptrend=True)
+    candle, tr_st = trend.run()
+    assert tr_st['candle'] == "doji_in_uptrend"
+
+def test_downtrend_doji(run_before_all_tests):
+    from indicators.candles.Doji import Doji
+    trend = Doji(207, 230, 188, 210, "x", downtrend=True)
+    candle, tr_st = trend.run()
+    assert tr_st['candle'] == "doji_in_downtrend"
+
 def test_paper_umbrella_hangingman(run_before_all_tests):
     from indicators.candles.PaperUmbrella import PaperUmbrella
     trend = PaperUmbrella(100, 103, 94, 102, "x", uptrend=True)
