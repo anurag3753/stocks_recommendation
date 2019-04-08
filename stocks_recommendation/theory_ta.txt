@@ -1,0 +1,26 @@
+S&R:
+- For a long trade, the low of the pattern should be around the support
+- For a short trade, the high of the pattern should be around the resistance
+
+MA:
+MA works brilliantly when their is a trend and fails to perform when the stock moves sideways. This basically means the `MA` in its simplest form is a trend following system.
+- `Buy`  when the short term ma(25days) turns greater than long term ma(50days). Stay in trade as long as condition is satisfied.
+- `Exit` the long position when the short term ma(25days) turns lesser than long term ma(50days).
+
+RSI:
+RSI is a leading momentum indicator which helps in identifying a trend reversal. RSI indicator oscillates between 0 and 100.
+RSI is the most popular leading indicator, which gives out strongest signals during the periods of sideways and non trending ranges.
+Objective of using RSI is to help the trader identify over sold and overbought price areas.
+Overbought implies that the positive momentum in the stock is so high that it may not be sustainable for long and hence there could be a correction.
+Likewise, an oversold position indicates that the negative momentum is high leading to a possible reversal.
+
+Tips:
+- Suppose RSI value of 26.8 also coincides with bullish engulfing pattern. It is a double confirmation to go long. Needless to say that both volume and S&R also confirm to this.
+- If the RSI is fixed in an overbought region for a prolonged period, look for buying opportunities instead of shorting. The RSI stays in the overbought region for a prolonged period because of an excess positive momentum.
+- If the RSI is fixed in an oversold region for a prolonged period, look for selling opportunities rather than buying. RSI stays in the oversold region for a prolonged period because of an excess negative momentum.
+- If the RSI value starts moving away from the oversold value after a prolonged period, look for buying opportunities. For example, the RSI moves above 30 after a long time may mean that the stock may have bottomed out, hence a case of going long.
+- If the RSI value starts moving away from the overbought value after a prolonged period, look for selling opportunities. For example, RSI moving below 70 after a long time. This means the stock may have topped out, hence a case for shorting
+
+Finally, do remember RSI is not used often as a standalone indicator by  traders, it is used along with other candlestick patterns and indicators to study the market.
+
+MACD:

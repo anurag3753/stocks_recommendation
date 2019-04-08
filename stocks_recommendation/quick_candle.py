@@ -90,6 +90,23 @@ def run_quick_candle():
         if candle:
             indicator[stock].append(trade_setting)
 
+        # Run Harami
+        from indicators.candles.Harami import Harami
+        tr_st = Harami(o, h, l, c, stock, uptrend=prev_stats[stock]['uptrend'], \
+        downtrend=prev_stats[stock]['downtrend'], find_trend = False, \
+        previous_day=prev_stats[stock]['p_ohlcv'])
+        candle, trade_setting = tr_st.run()
+        if candle:
+            indicator[stock].append(trade_setting)
+
+        # Run Volume
+        from indicators.Volume import Volume
+        tr_st = Volume(o, h, l, c, v, stock, avg=prev_stats[stock]['avg_vol'], \
+            previous_day=prev_stats[stock]['p_ohlcv'])
+        signal = tr_st.run()
+        if signal != "trap":
+            indicator[stock].append(signal)
+
     # print only those stocks where a pattern is formed
     for k in indicator:
         if indicator[k]:

@@ -1,7 +1,7 @@
 from indicators.candles.CandleTemplate import Candle
 from generic.stock_utils import general_info
-from generic.stock_utils import is_uptrend
-from generic.stock_utils import is_downtrend
+from generic.stock_utils import is_uptrend, is_downtrend
+from generic.stock_utils import print_stock_data
 
 class PaperUmbrella( Candle ):
     def __init__(self, o, h, l, c, stock_name, threshold = 1.5, uptrend = False, downtrend = False, find_trend = True):
@@ -16,8 +16,12 @@ class PaperUmbrella( Candle ):
         real_body = self.true_body()
         upper_shadow, lower_shadow = self.get_shadow_length()
         flag = False
-        if (float(lower_shadow)/real_body >= 2) and ((float(upper_shadow) / self.h) * 100) <= self.threshold:
-            flag = True
+        try:
+            if (float(lower_shadow)/real_body >= 2) and ((float(upper_shadow) / self.h) * 100) <= self.threshold:
+                flag = True
+        except ZeroDivisionError as e:
+            print_stock_data(self.stock_name, self.o, self.h, self.l, self.c)
+            print (e)
         
         if self.find_trend:
             if not self.uptrend and not self.downtrend:
