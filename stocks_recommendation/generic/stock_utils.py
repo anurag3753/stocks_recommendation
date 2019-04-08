@@ -232,7 +232,7 @@ def get_todays_stats(stock_name):
     if latest_date:
         return get_stock_stats(stock_name, latest_date)
 
-def is_small_body(o, c, threshold):
+def is_small_body(o, h, l, c, threshold):
     """Check if it has small candle body
     
     Arguments:
@@ -244,7 +244,7 @@ def is_small_body(o, c, threshold):
         bool -- True, if body if lesser than threshold Else False
     """
 
-    return ((abs(o - c) / o) * 100 <= threshold)
+    return (float(abs(o - c) / abs(h - l)) * 100 <= threshold)
 
 def is_bullish(o, c):
     """Check if the day is Bullish
@@ -321,7 +321,7 @@ def is_downtrend(stock_name, date=get_nth_date(), days=5):
 
     sql_result = get_historical_data(stock_name, days=days, date=date)
     closing_prices = collect_closing_prices(sql_result)
-    return is_descending(closing_prices)
+    return is_ascending(closing_prices)
 
 def is_ascending(number_list):
     """Check if the number_list is in strict ascending order
@@ -356,7 +356,7 @@ def is_uptrend(stock_name, date=get_nth_date(), days=5):
 
     sql_result = get_historical_data(stock_name, days=days, date=date)
     closing_prices = collect_closing_prices(sql_result)
-    return is_ascending(closing_prices)
+    return is_descending(closing_prices)
 
 def get_shadow_length(o, h, l, c):
     """Get the upper and lower shadow length
