@@ -32,7 +32,7 @@ class SpinningTop( Candle ):
                 self.candle = True
                 self.trade_setting["action"] = "sell"
                 self.trade_setting["buy"] = self.c
-                self.trade_setting["stoploss"] = self.o
+                self.trade_setting["stoploss"] = self.l
                 self.trade_setting["candle"] = "spinning_top_in_uptrend"
                 self.trade_setting["target"] = ""
                 self.trade_setting["info"] = general_info("spinning_top_in_uptrend")
@@ -41,7 +41,7 @@ class SpinningTop( Candle ):
                 self.candle = True
                 self.trade_setting["action"] = "buy"
                 self.trade_setting["buy"] = self.c
-                self.trade_setting["stoploss"] = self.o
+                self.trade_setting["stoploss"] = self.h
                 self.trade_setting["candle"] = "spinning_top_in_downtrend"
                 self.trade_setting["target"] = ""
                 self.trade_setting["info"] = general_info("spinning_top_in_downtrend")
