@@ -2,7 +2,7 @@ from indicators.candles.CandleTemplate import Candle
 from generic.stock_utils import general_info
 
 class Marubozu( Candle ):
-    def __init__(self, o, h, l, c, stock_name, threshold = 0.2):
+    def __init__(self, o, h, l, c, stock_name, threshold = 0.3):
         # invoking the __init__ of the parent class
         Candle.__init__(self, o, h, l, c, stock_name)
         self.threshold = threshold
