@@ -5,7 +5,7 @@ from generic.stock_utils import is_downtrend
 from generic.stock_utils import is_small_body
 
 class Doji( Candle ):
-    def __init__(self, o, h, l, c, stock_name, body_threshold = 2, uptrend = False, downtrend = False, find_trend = True):
+    def __init__(self, o, h, l, c, stock_name, body_threshold = 5, uptrend = False, downtrend = False, find_trend = True):
         # invoking the __init__ of the parent class
         Candle.__init__(self, o, h, l, c, stock_name)
         self.body_threshold = body_threshold
@@ -15,7 +15,7 @@ class Doji( Candle ):
 
     def run(self):
         flag = False
-        if is_small_body(self.o, self.c, self.body_threshold):
+        if is_small_body(self.o, self.h, self.l, self.c, self.body_threshold):
             flag = True
 
         if self.find_trend:
