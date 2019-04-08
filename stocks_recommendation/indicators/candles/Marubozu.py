@@ -2,7 +2,7 @@ from indicators.candles.CandleTemplate import Candle
 from generic.stock_utils import general_info
 
 class Marubozu( Candle ):
-    def __init__(self, o, h, l, c, stock_name, threshold = 0.3):
+    def __init__(self, o, h, l, c, stock_name, threshold = 0.2):
         # invoking the __init__ of the parent class
         Candle.__init__(self, o, h, l, c, stock_name)
         self.threshold = threshold
@@ -19,7 +19,7 @@ class Marubozu( Candle ):
 
         elif (((abs(self.o-self.h)/self.h) * 100 <= self.threshold) and ((abs(self.c-self.l)/self.l) * 100 <= self.threshold)):
             self.candle = True
-            self.trade_setting["action"] = "short"
+            self.trade_setting["action"] = "sell"
             self.trade_setting["buy"] = self.c
             self.trade_setting["stoploss"] = self.o # On a bearish marubozu, the day's open/high defines stoploss in case of intraday, high in case of F&O
             self.trade_setting["candle"] = "bearish_marubozu"
