@@ -21,7 +21,7 @@ class Marubozu( Candle ):
             self.candle = True
             self.trade_setting["action"] = "sell"
             self.trade_setting["buy"] = self.c
-            self.trade_setting["stoploss"] = self.o # On a bearish marubozu, the day's open/high defines stoploss in case of intraday, high in case of F&O
+            self.trade_setting["stoploss"] = self.h # On a bearish marubozu, the day's open/high defines stoploss in case of intraday, high in case of F&O
             self.trade_setting["candle"] = "bearish_marubozu"
             self.trade_setting["target"] = ""
             self.trade_setting["info"] =  general_info("bearish_marubozu")
