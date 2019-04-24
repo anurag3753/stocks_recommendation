@@ -2,6 +2,8 @@ import math
 import string
 import random
 import datetime
+import numpy as np
+import pandas as pd
 from generic.utils import *
 from generic.connect_database import ConnectDatabase
 
@@ -14,6 +16,17 @@ CLOSE_INDEX  = 4
 VOLUME_INDEX = 5
 
 STOCK_INFO_DICT = load_yaml("docs/stock_info.yaml")
+
+def compute_daily_return_mean_std(df, column_name):
+    df['log_ret']    = np.log(df[column_name]/df[column_name].shift(1)) *100
+    daily_avg        = round(df.loc[:,'log_ret'].mean(), 2)
+    daily_volatility = round(df.loc[:,'log_ret'].std(), 2)
+    return daily_avg, daily_volatility
+
+def trading_range(stock_return_mean, stock_return_std, days=252, std=2):
+    avg  = stock_return_mean*days
+    sd   = stock_return_std*math.sqrt(days)
+    return ( avg - std * sd , avg + std * sd)
 
 def list_files(directory):
     '''Return all files in the directory
