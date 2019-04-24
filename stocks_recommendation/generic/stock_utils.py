@@ -28,6 +28,11 @@ def trading_range(stock_return_mean, stock_return_std, days=252, std=2):
     sd   = stock_return_std*math.sqrt(days)
     return ( avg - std * sd , avg + std * sd)
 
+def stock_expected_range(current_price, low, high):
+    low_range  = current_price + float(current_price * low) / 100
+    high_range = current_price + float(current_price * high) / 100
+    return low_range, high_range
+
 def list_files(directory):
     '''Return all files in the directory
     
