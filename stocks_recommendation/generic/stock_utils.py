@@ -33,7 +33,7 @@ def stock_expected_range(current_price, low, high):
     high_range = current_price + float(current_price * high) / 100
     return low_range, high_range
 
-def risk_to_reward_ratio(entry, stoploss, target, rrr_threshold=1.5):
+def reward_to_risk_ratio(entry, stoploss, target, rrr_threshold=1.5):
     """Reward to Risk Ratio
     
     Arguments:
