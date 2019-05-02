@@ -33,6 +33,25 @@ def stock_expected_range(current_price, low, high):
     high_range = current_price + float(current_price * high) / 100
     return low_range, high_range
 
+def risk_to_reward_ratio(entry, stoploss, target, rrr_threshold=1.5):
+    """Reward to Risk Ratio
+    
+    Arguments:
+        entry {float} -- Entry
+        stoploss {float} -- Stoploss
+        target {float} -- Exit/Target
+    
+    Keyword Arguments:
+        rrr_threshold {float} -- rrr ratio (default: {1.5})
+    
+    Returns:
+        bool -- Checks if the trade is good enough Or not
+    """
+    risk   = abs(entry - stoploss)
+    reward = abs(target - entry)
+    return float(reward)/risk >= rrr_threshold
+
+
 def list_files(directory):
     '''Return all files in the directory
     
