@@ -11,7 +11,7 @@ from src.download_report import *
 LAC = 100000
 
 # Valid Periods ["day", "week", "15days", "1month", "3month", "12month", "24month"]
-PERIOD = "1month"
+PERIOD = "12month"
 
 # Columns Needed
 cols_needed = {
@@ -83,9 +83,8 @@ if __name__ == "__main__":
     for stock in stocks:
         download_historical_report(env['data_csv_path'], download_location, data['browser'], \
             data['driver_location'], data['webdriver_location'], stock, PERIOD)
-
-    # Wait for some time to finish complete downloading
-    time.sleep(20) # Sleep for 20 sec
+        # Wait for some time to finish complete downloading
+        time.sleep(10) # Sleep for 10 sec
 
     # Process the downloaded data
     file_list = list_files(download_location)
