@@ -1,2 +1,3 @@
-# hidden_projects
-Collection of all the projects, which may Or may not go public
+# stocks_recommendation
+Analyze NSE Stocks and suggest stocks based on Technical Analysis. Candlesticks Patterns and Other Indications are developed based on study from Varsity.
+Further python pickle module is used to optimize the performance.
